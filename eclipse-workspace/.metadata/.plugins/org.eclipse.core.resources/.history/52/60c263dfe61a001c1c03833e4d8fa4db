@@ -1,0 +1,16 @@
+package communicationCrypte;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Des d = new Des();
+		
+		d.crypte("Message secret");
+		System.out.println(d);
+		
+		d.decrypte();
+		System.out.println(d);
+
+	}
+
+}
