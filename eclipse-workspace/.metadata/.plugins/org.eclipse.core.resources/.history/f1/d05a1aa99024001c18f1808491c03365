@@ -112,16 +112,9 @@ public class Des<E> {
 	}
 */	
 	public int[] crypte(String mess) {
-		
 		int[] a = stringToBit(mess);
-		
 		System.out.println(Arrays.toString(a));
 		System.out.println(a.length);
-		
-		int[][] b = suiteBitToBloc(a);
-		
-		System.out.println(b);
-		
 		return a;
 	}
 /*

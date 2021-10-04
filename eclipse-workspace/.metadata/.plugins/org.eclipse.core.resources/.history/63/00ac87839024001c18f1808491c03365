@@ -37,10 +37,8 @@ public class Des<E> {
 	//change un string en suite de bit
 	private int[] stringToBit(String message){
 		byte[] octet = message.getBytes();
-		System.out.println(octet);
 		int taille = octet.length;
-		int[] listebit = new int [ 8 * taille ];
-		
+		int[] listebit = new int[8*taille];
 		for(int i = 0 ; i < taille ; i++) {
 			
 			byte mot = octet[i];
@@ -112,16 +110,9 @@ public class Des<E> {
 	}
 */	
 	public int[] crypte(String mess) {
-		
 		int[] a = stringToBit(mess);
-		
 		System.out.println(Arrays.toString(a));
 		System.out.println(a.length);
-		
-		int[][] b = suiteBitToBloc(a);
-		
-		System.out.println(b);
-		
 		return a;
 	}
 /*

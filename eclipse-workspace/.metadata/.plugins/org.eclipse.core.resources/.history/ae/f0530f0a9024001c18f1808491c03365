@@ -26,7 +26,7 @@ public class Des<E> {
 	public Des() {
 		Random r = new Random();
 		r.setSeed(0);
-		for(int i = 0 ; i < this.taille_bloc ; i++) {
+		for(int i =0;i<this.taille_bloc;i++) {
 			this.master_key[i] = r.nextInt(1);
 		}
 		
@@ -37,18 +37,13 @@ public class Des<E> {
 	//change un string en suite de bit
 	private int[] stringToBit(String message){
 		byte[] octet = message.getBytes();
-		System.out.println(octet);
 		int taille = octet.length;
-		int[] listebit = new int [ 8 * taille ];
-		
-		for(int i = 0 ; i < taille ; i++) {
-			
+		int[] listebit = new int[8*taille];
+		for(int i=0;i<taille;i++) {
 			byte mot = octet[i];
-			
 			String motBinaire  = Integer.toString(mot,2);
-			
-			for(int j = 0 ; j < motBinaire.length() ; j++){
-				listebit[ i * 8 + j ] = Character.getNumericValue((Character)motBinaire.charAt(j));
+			for(int j = 0; j<motBinaire.length();j++){
+				listebit[i*8+j] = Character.getNumericValue((Character)motBinaire.charAt(j));
 			}
 		}
 		return listebit;
@@ -61,9 +56,9 @@ public class Des<E> {
 		int longueur = taille / this.taille_bloc;
 		int[][] blocs = new int[longueur][this.taille_bloc];
 		
-		for(int i = 0; i<longueur; i++) {
-			for(int j = 0 ; j < this.taille_bloc ; j++) {
-				blocs[i][j] = suiteBit[ this.taille_bloc * i + j ];
+		for(int i;i<longueur;i++) {
+			for(int j; j<this.taille_bloc; j++) {
+				blocs[i][j] = this.taille_bloc*i + j;
 			}
 		}
 		
@@ -112,16 +107,9 @@ public class Des<E> {
 	}
 */	
 	public int[] crypte(String mess) {
-		
 		int[] a = stringToBit(mess);
-		
 		System.out.println(Arrays.toString(a));
 		System.out.println(a.length);
-		
-		int[][] b = suiteBitToBloc(a);
-		
-		System.out.println(b);
-		
 		return a;
 	}
 /*
