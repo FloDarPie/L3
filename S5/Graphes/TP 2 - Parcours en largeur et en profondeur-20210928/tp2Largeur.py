@@ -56,35 +56,21 @@ def largeur(G,i):
 	return ordreVisite
 	
 def largeurG(G):
-	Visite={1:True}
-	File=[1]
-	def largeur2(G,i,Visite):
-			File=[i]
-
-			ordreVisite=[]
-
-			while File!=[]:
-				y = File[0]
-				File=File[1:]
-				for successeur in G[y]:
-					if successeur not in Visite:
-						Visite[successeur]=True
-						File.append(successeur)
-				ordreVisite.append(y)
-			return ordreVisite,Visite
-		
-	ordreVisite=largeur(G,1)
-	for k in ordreVisite:
-		Visite[k]=True
-	X=1
-	while len(Visite)!=nbSommets(G):
-		print(ordreVisite)
-		X+=1
-		if X not in Visite:
-			a,b=largeur2(G,X,Visite)
-			ordreVisite+=a
-			Visite=b
-	return ordreVisite
+    Visite = set()
+    File= []
+    ordreVisite = []
+    for sommet in G:
+        if not sommet in Visite:
+            File.append(sommet)
+            while len(File) > 0:
+                s = File.pop(0)
+                ordreVisite.append(s)
+                Visite.add(s)
+                for succ in G[s]:
+                    if not succ in Visite:
+                        Visite.add(succ)
+                        File.append(succ)
+    return ordreVisite
 
 # _______        _         _    _       _ _        _               
 #|__   __|      | |       | |  | |     (_) |      (_)              
