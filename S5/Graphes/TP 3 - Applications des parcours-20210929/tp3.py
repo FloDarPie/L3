@@ -15,19 +15,22 @@ def isConnexe(G):
 	return len(ordreVisite) == nbSommets(G)
 
 def cyclicRec(G, i, pere, Visite):
-	ordreVisite = []
-
+	Visite.add(i)
 	for i in G:
 		if i not in Visite:
-			
-
-	if pere == i:
-		return True
-
+			cyclicRec(G,i,pere, Visite)
+		elif pere != i:
+			return True
 	return False
 	
 def isCyclic(G):
-	return False
+	Visite = {}
+	cycle = False
+	for voisin in G:
+		if voisin not in G:
+			cycle = cyclicRec(G, voisin, voisin, Visite)
+			
+	return cycle
 	
 def isArbre(G):
 	return False
