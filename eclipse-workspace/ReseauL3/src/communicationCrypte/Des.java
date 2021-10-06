@@ -96,21 +96,54 @@ public class Des<E> {
 	
 	
 	
-/*
+
 	private String bitToString(int[] listebit) {
 		String mess = new String();
 		String octet = "";
 		for(int i = 0; i<listebit.length;i++) {
 			octet+=((Integer)listebit[i]).toString();
-			if(i%8==0) {
-				octet.;//regler en puissance de 2 avec un calcul au fur et à mesure
+			
+		}
+		System.out.println("\noctet");
+				
+		//morceau a convertir
+		
+		int tailleOctet = octet.length();
+		System.out.println(tailleOctet);
+		//affichage d'octet
+		for(int i = 1; i<tailleOctet; i++) {
+			System.out.print(octet.substring(i-1,i));
+		}
+		System.out.println();
+		String[] tableauOctet = new String[tailleOctet/8];
+		Integer[] tabValOctet = new Integer[tailleOctet/8];
+		int j = 0;
+		while(tailleOctet/8 != j) {
+			tableauOctet[j] = octet.substring(j*8,j*8+8);
+			j++;
+		}
+		
+		for(int i=0;i<tableauOctet.length;i++) {
+			System.out.print(tableauOctet[i]+" ");
+		}
+		System.out.println();
+		
+		for(int i =0; i<tableauOctet.length;i++) {
+			tabValOctet[i]=0;
+			for(int m=7, k=0;m>-1 && k<8;m-- , k++) {
+				tabValOctet[i] += Integer.parseInt(tableauOctet[i].substring(k,k+1))*(2^m);
 			}
 		}
 		
+		for(int i=0;i<tabValOctet.length;i++) {
+			System.out.print(tabValOctet[i]+" ");
+		}System.out.println();
 		
 		return mess;
 	}
-*/	
+	
+	
+	
 	public int[] crypte(String mess) {
 		
 		int[] a = stringToBit(mess);
@@ -124,16 +157,16 @@ public class Des<E> {
 		
 		return a;
 	}
-/*
+
 	public String decrypte(int[] code) {
 		String mess = new String();
-		System.out.println(code.length);
+
 		mess = bitToString(code);
-		System.out.println(mess);
+		System.out.println("mess : " + mess);
 
 		return mess;
 	}
-*/
+
 	
 	/*
 	 * @Author
