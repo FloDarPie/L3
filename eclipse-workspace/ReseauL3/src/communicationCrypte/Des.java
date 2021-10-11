@@ -37,7 +37,9 @@ public class Des<E> {
 	//change un string en suite de bit
 	private int[] stringToBit(String message){
 		byte[] octet = message.getBytes();
-		System.out.println(octet);
+		for(int i=0;i <octet.length;i++) {
+			System.out.print(octet[i]+" ");
+		}
 		int taille = octet.length;
 		int[] listebit = new int [ 8 * taille ];
 		
@@ -131,29 +133,37 @@ public class Des<E> {
 		for(int i =0; i<tableauOctet.length;i++) {
 			tabValOctet[i]=0;
 			for(int m=7, k=0;m>-1 && k<8;m-- , k++) {
-				tabValOctet[i] += Integer.parseInt(tableauOctet[i].substring(k,k+1))*(2^m);
+				int chiffre = 1;
+				for(int l = 0; l<m-1;l++) {
+					chiffre *= 2;
+				}
+				tabValOctet[i] += chiffre * Integer.parseInt(tableauOctet[i].substring(k,k+1));;
 			}
 		}
-		
 		for(int i=0;i<tabValOctet.length;i++) {
 			System.out.print(tabValOctet[i]+" ");
 		}System.out.println();
 		
+		
+		for(int i = 0; i<tabValOctet.length;i++) {
+			mess += ((char)((int)tabValOctet[i]));
+		}
 		return mess;
 	}
 	
 	
 	
 	public int[] crypte(String mess) {
-		
+		System.out.println(mess);
 		int[] a = stringToBit(mess);
-		
-		System.out.println(Arrays.toString(a));
+		System.out.println();
+		for(int i : a) {
+			System.out.print(i);
+		}
+		System.out.println();
 		System.out.println(a.length);
 		
-		int[][] b = suiteBitToBloc(a);
-		
-		System.out.println(b);
+		int[][] b = suiteBitToBloc(a);		
 		
 		return a;
 	}
