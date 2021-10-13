@@ -37,9 +37,12 @@ public class Des<E> {
 	//change un string en suite de bit
 	private int[] stringToBit(String message){
 		byte[] octet = message.getBytes();
-		for(int i=0;i <octet.length;i++) {
-			System.out.print(octet[i]+" ");
+		for(int i=0; i<octet.length;i++) {
+			System.out.print(octet[i] + " ");
 		}
+		System.out.println();
+		
+		
 		int taille = octet.length;
 		int[] listebit = new int [ 8 * taille ];
 		
@@ -53,6 +56,11 @@ public class Des<E> {
 				listebit[ i * 8 + j ] = Character.getNumericValue((Character)motBinaire.charAt(j));
 			}
 		}
+		for(int i = 0; i<listebit.length;i++) {
+			System.out.print(listebit[i]);
+		}
+		System.out.println();
+		
 		return listebit;
 	}
 	
@@ -106,7 +114,6 @@ public class Des<E> {
 			octet+=((Integer)listebit[i]).toString();
 			
 		}
-		System.out.println("\noctet");
 				
 		//morceau a convertir
 		
@@ -125,10 +132,6 @@ public class Des<E> {
 			j++;
 		}
 		
-		for(int i=0;i<tableauOctet.length;i++) {
-			System.out.print(tableauOctet[i]+" ");
-		}
-		System.out.println();
 		
 		for(int i =0; i<tableauOctet.length;i++) {
 			tabValOctet[i]=0;
@@ -139,13 +142,18 @@ public class Des<E> {
 				}
 				tabValOctet[i] += chiffre * Integer.parseInt(tableauOctet[i].substring(k,k+1));;
 			}
+			
 		}
 		for(int i=0;i<tabValOctet.length;i++) {
 			System.out.print(tabValOctet[i]+" ");
 		}System.out.println();
 		
-		
+		System.out.println(tableauOctet.length == tabValOctet.length);
 		for(int i = 0; i<tabValOctet.length;i++) {
+			
+			if(tabValOctet[i]==64) {
+				tabValOctet[i]/=2;
+			}
 			mess += ((char)((int)tabValOctet[i]));
 		}
 		return mess;
@@ -154,14 +162,7 @@ public class Des<E> {
 	
 	
 	public int[] crypte(String mess) {
-		System.out.println(mess);
 		int[] a = stringToBit(mess);
-		System.out.println();
-		for(int i : a) {
-			System.out.print(i);
-		}
-		System.out.println();
-		System.out.println(a.length);
 		
 		int[][] b = suiteBitToBloc(a);		
 		
@@ -172,7 +173,6 @@ public class Des<E> {
 		String mess = new String();
 
 		mess = bitToString(code);
-		System.out.println("mess : " + mess);
 
 		return mess;
 	}
