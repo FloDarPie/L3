@@ -13,7 +13,7 @@ let debut = Date.now();
 
 let end = 0;
 
-let attente = 1;
+let attente = 3000;
 
 
 oui.addEventListener("click", (event) => {
