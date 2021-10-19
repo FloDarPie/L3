@@ -44,7 +44,7 @@ public class Des<E> {
 		
 		
 		int taille = octet.length;
-		int[] listebit = new int [ 8 * taille ]; //on admet ici que les bytes correspondent à des octets
+		int[] listebit = new int [ 8 * taille ];
 		
 		for(int i = 0 ; i < taille ; i++) {
 			
@@ -83,7 +83,7 @@ public class Des<E> {
 	//permutation avant
 	private int[][] permutAvant(int[][] blocs, int[] reference) {
 		
-		int[][] blocsPermute = new int[blocs.length][this.taille_bloc]; 
+		int[][] blocsPermute = new int[ blocs.length][this.taille_bloc]; 
 		
 		for(int i = 0; i<blocs.length; i++) {
 			for (int j = 0; j<reference.length; j++)

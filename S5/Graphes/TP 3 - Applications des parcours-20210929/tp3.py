@@ -16,7 +16,6 @@ def isConnexe(G):
 
 def cyclicRec(G, balise, pere, Visite):
     Visite[balise] = True
-    print(Visite)
     for i in G:
         if i not in Visite:
             cyclicRec(G , i , pere , Visite)
@@ -26,18 +25,18 @@ def cyclicRec(G, balise, pere, Visite):
 
 def isCyclic(G):
     Visite = {}
-    cycle = True
+    cycle = False
     for voisin in G:
         if voisin not in Visite:
-            print(cycle)
             cycle = cyclicRec(G, voisin, voisin, Visite)
-            
-    return cycle
+            if cycle == True:
+                return True            
+    return False
 
-assert isCyclic({1:[2,3],2:[1,3],3:[1,2]}) == True, "Err"
+#assert isCyclic({1:[2,3],2:[1,3],3:[1,2]}) == True, "Err"
     
 def isArbre(G):
-    return isConnexe and isCyclic
+    return isConnexe(G) and not isCyclic(G)
     
 def plusCourtChemin(G, i):
     Dist = dict()
