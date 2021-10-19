@@ -15,7 +15,7 @@ public class Main {
 		
 		
 		
-		String mess2 = "azertyuiopqsdfghjklmwxcvbn?,.;/:!%*^$1234567890+=) -(&~ #{[|`\\^@]";
+		String mess2 = "azertyuiopqsdfghjklmwxcvbn  ?,.;/:!%*^$1234567890+=) -(&~ #{[|`\\^@]";
 		System.out.println("Avant crypatage : "+mess2);
 		int[] messCrypte2 = d.crypte(mess2);
 		String messDeCrypte2 = d.decrypte(messCrypte2);

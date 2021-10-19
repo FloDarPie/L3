@@ -64,11 +64,11 @@ public class Des<E> {
 		return listebit;
 	}
 	
-	//decoupe en bloc un tableau de bit
+	//decoupe en blocs un tableau de bit
 	private int[][] suiteBitToBloc(int[] suiteBit){
 		
 		int taille = suiteBit.length;
-		int longueur = taille / this.taille_bloc;
+		int longueur = taille / this.taille_bloc; //decoupe en bloc de 8 par defaut
 		int[][] blocs = new int[longueur][this.taille_bloc];
 		
 		for(int i = 0; i<longueur; i++) {
@@ -81,6 +81,17 @@ public class Des<E> {
 	}
 	
 	//permutation avant
+	private int[][] permutAvant(int[][] blocs, int[] reference) {
+		
+		int[][] blocsPermute = new int[ blocs.length][this.taille_bloc]; 
+		
+		for(int i = 0; i<blocs.length; i++) {
+			for (int j = 0; j<reference.length; j++)
+			blocsPermute[i][j] = blocs[i][reference[j]-1];;
+		}
+		return blocsPermute;
+	}
+	
 	
 	//separe un bloc en deux objet G et D
 	
@@ -100,13 +111,22 @@ public class Des<E> {
 	
 	//recolle G et D
 	
-	// permutation inverse
+	// permutation inverse finale
+	private int[][] permutArriere(int[][] blocs, int[] reference) {
+		
+		int[][] blocsPermute = new int[ blocs.length][this.taille_bloc]; 
+		
+		for(int i = 0; i<blocs.length; i++) {
+			for (int j = 0; j<reference.length; j++)
+			blocs[i][reference[j]-1] = blocsPermute[i][j];;
+		}
+		return blocsPermute;
+	}
 	
 	
 	
 	
-	
-
+	//convertir une chaine de bit en une suite de string
 	private String bitToString(int[] listebit) {
 		String mess = new String();
 		String octet = "";
@@ -132,7 +152,7 @@ public class Des<E> {
 			j++;
 		}
 		
-		
+		//convertir des series de blocs de 8 bits, en une valeur decimal
 		for(int i =0; i<tableauOctet.length;i++) {
 			tabValOctet[i]=0;
 			for(int m=7, k=0;m>-1 && k<8;m-- , k++) {
@@ -142,18 +162,24 @@ public class Des<E> {
 				}
 				tabValOctet[i] += chiffre * Integer.parseInt(tableauOctet[i].substring(k,k+1));;
 			}
-			
 		}
+		
+		//affichage des octets
 		for(int i=0;i<tabValOctet.length;i++) {
 			System.out.print(tabValOctet[i]+" ");
 		}System.out.println();
 		
 		System.out.println(tableauOctet.length == tabValOctet.length);
+
+		//changer une valeur numérique en sa valeur
+		/* a changer pour prendre ne compte les carac spéciaux*/
 		for(int i = 0; i<tabValOctet.length;i++) {
 			
+			//pour gerer l'espace
 			if(tabValOctet[i]==64) {
 				tabValOctet[i]/=2;
 			}
+			
 			mess += ((char)((int)tabValOctet[i]));
 		}
 		return mess;
@@ -164,7 +190,31 @@ public class Des<E> {
 	public int[] crypte(String mess) {
 		int[] a = stringToBit(mess);
 		
-		int[][] b = suiteBitToBloc(a);		
+		int[][] b = suiteBitToBloc(a);	
+		
+		System.out.println("suite initiale");
+		for(int i=0;i<b.length; i++) {
+			for(int j = 0; j<b[0].length;j++) {
+				System.out.print(b[i][j]);
+			}
+		}
+		
+		int[][] c = permutAvant(b, this.perm_initiale);
+		System.out.println("\npermut avant:");
+		for(int i=0;i<c.length; i++) {
+			for(int j = 0; j<c[0].length;j++) {
+				System.out.print(c[i][j]);
+			}
+		}
+		
+		int[][] c2 = permutArriere(c, this.perm_initiale);
+		System.out.println("\npermut arriere");
+		for(int i=0;i<c2.length; i++) {
+			for(int j = 0; j<c2[0].length;j++) {
+				System.out.print(c2[i][j]);
+			}
+		}
+		
 		
 		return a;
 	}
