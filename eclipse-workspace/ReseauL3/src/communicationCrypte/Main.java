@@ -1,11 +1,18 @@
 package communicationCrypte;
 
-import java.util.Arrays;
-
 public class Main {
 
+	Des monDes;
+	
+	public boolean testStringToBit(String mess, int[] bit) {
+		this.monDes = new Des();
+		int[] tableau = monDes.stringToBit(mess); 
+		return tableau.equals( bit );
+	}
+		
+	
+	
 	public static void main(String[] args) {
-				
 		Des d = new Des();
 		String mess = "Message secret";
 		System.out.println("Avant crypatage : "+mess);

@@ -5,12 +5,12 @@ import java.util.Random;
 
 public class Des<E> {
 	
-	private int taille_bloc = 64;
-	private int sous_bloc = 32;
+	public int taille_bloc = 64;
+	public int sous_bloc = 32;
 	
-	private int nb_ronde = 1;
+	public int nb_ronde = 1;
 	
-	private int[] perm_initiale = {
+	public int[] perm_initiale = {
 			58,50,42,34,26,18,10,2,
 			60,52,44,36,28,20,12,4,
 			62,54,46,38,30,22,14,6,
@@ -20,8 +20,8 @@ public class Des<E> {
 			61,53,45,37,29,21,13,5,
 			63,55,47,39,31,23,15,7};
 
-	private int[] tab_decalage = {1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1};
-	private int[] master_key = new int[this.taille_bloc];
+	public int[] tab_decalage = {1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1};
+	public int[] master_key = new int[this.taille_bloc];
 	
 	public Des() {
 		Random r = new Random();
@@ -35,7 +35,7 @@ public class Des<E> {
 	}
 	
 	//change un string en suite de bit
-	private int[] stringToBit(String message){
+	public int[] stringToBit(String message){
 		byte[] octet = message.getBytes();
 		for(int i=0; i<octet.length;i++) {
 			System.out.print(octet[i] + " ");
@@ -65,7 +65,7 @@ public class Des<E> {
 	}
 	
 	//decoupe en blocs un tableau de bit
-	private int[][] suiteBitToBloc(int[] suiteBit){
+	public int[][] suiteBitToBloc(int[] suiteBit){
 		
 		int taille = suiteBit.length;
 		int longueur = taille / this.taille_bloc; //decoupe en bloc de 8 par defaut
@@ -81,7 +81,7 @@ public class Des<E> {
 	}
 	
 	//permutation avant
-	private int[][] permutAvant(int[][] blocs, int[] reference) {
+	public int[][] permutAvant(int[][] blocs, int[] reference) {
 		
 		int[][] blocsPermute = new int[blocs.length][this.taille_bloc]; 
 		
@@ -112,9 +112,8 @@ public class Des<E> {
 	//recolle G et D
 	
 	// permutation inverse finale
-	private int[][] permutArriere(int[][] blocs, int[] reference) {
-		
-		int[][] blocsPermute = new int[ blocs.length][this.taille_bloc]; 
+	public int[][] permutArriere(int[][] blocs, int[] reference) {		
+		int[][] blocsPermute = new int[blocs.length][blocs[0].length]; 
 		
 		for(int i = 0; i<blocs.length; i++) {
 			for (int j = 0; j<reference.length; j++)
@@ -127,7 +126,7 @@ public class Des<E> {
 	
 	
 	//convertir une chaine de bit en une suite de string
-	private String bitToString(int[] listebit) {
+	public String bitToString(int[] listebit) {
 		String mess = new String();
 		String octet = "";
 		for(int i = 0; i<listebit.length;i++) {
@@ -208,12 +207,13 @@ public class Des<E> {
 		}
 		
 		int[][] c2 = permutArriere(c, this.perm_initiale);
-		System.out.println("\npermut arriere");
+		System.out.println();
 		for(int i=0;i<c2.length; i++) {
 			for(int j = 0; j<c2[0].length;j++) {
 				System.out.print(c2[i][j]);
 			}
 		}
+		System.out.println("\npermut arriere");
 		
 		
 		return a;
@@ -250,7 +250,7 @@ public class Des<E> {
 	}
 	
 	
-	private void permutation(byte[][] blocs){
+	public void permutation(byte[][] blocs){
 		
 		for(int i=0; i < blocs.length;i++) {
 			

@@ -1,0 +1,14 @@
+package communicationCrypte;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class testMethodeDes {
+	
+	Des monDes;
+	
+	
+	public static void main() {
+		System.out.println("huhu");
+	}
+}
