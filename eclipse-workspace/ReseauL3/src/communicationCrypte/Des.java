@@ -1,6 +1,7 @@
 package communicationCrypte;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Des<E> {
@@ -51,11 +52,26 @@ public class Des<E> {
 			byte mot = octet[i];
 			
 			String motBinaire  = Integer.toString(mot,2);
+			System.out.println(motBinaire);
+			//converti le mot binaire String en int
 			
-			for(int j = 0 ; j < motBinaire.length() ; j++){
-				listebit[ i * 8 + j ] = Character.getNumericValue((Character)motBinaire.charAt(j));
+			int[] petitTableau = new int[motBinaire.length()];
+			System.out.println("rempli tab");
+			for(int j = 0 ; j > motBinaire.length(); j++){
+				System.out.print(Character.getNumericValue((Character)motBinaire.charAt(j)));
+				petitTableau[j] = Integer.parseInt( motBinaire,j);
 			}
+			
+			//mettre ce petit tableau dans une case de notre liste de bit
+			System.out.println("\nrempli liste");
+			for (int j = 8-petitTableau.length; j< 8;j++) {
+				System.out.print(petitTableau[j - 8 + petitTableau.length]);
+				listebit[i*8+j] = petitTableau[j - 8 + petitTableau.length];
+			}
+			System.out.println();
 		}
+		
+		//affiche le tableau de bit
 		for(int i = 0; i<listebit.length;i++) {
 			System.out.print(listebit[i]);
 		}

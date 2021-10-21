@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;TableHachage.java&apos; to &apos;Hachage.TableHachage.java&apos;&#x0A;- Original project: &apos;TP4&apos;&#x0A;- Destination element: &apos;Hachage.TableHachage.java&apos;&#x0A;- Original element: &apos;Hachage.TableHachage.java&apos;" description="Copy compilation unit" destination="/src&lt;Hachage{TableHachage.java" element1="/src&lt;Hachage{TableHachage.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1602512229825" units="1" version="1.0"/>
-</session>
