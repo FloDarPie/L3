@@ -40,7 +40,7 @@ class LesTests{
 class Main{
 	public static void main(String[] args) {
 		int[] j = new int[1];
-		j[0]=2;
+		j[0]=1;
 		System.out.println(LesTests.testStringToBit("2",j));
 	}
 
