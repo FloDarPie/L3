@@ -1,13 +1,15 @@
 package communicationCrypte;
 
-import java.util.Arrays;
-import java.util.Iterator;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Random;
+
+import com.sun.tools.javap.TryBlockWriter;
 
 public class Des<E> {
 	
 	public int taille_bloc = 64;
-	public int sous_bloc = 32;
+	public int sous_bloc = this.taille_bloc / 2;
 	
 	public int nb_ronde = 1;
 	
@@ -36,13 +38,16 @@ public class Des<E> {
 	}
 	
 	//change un string en suite de bit
-	public int[] stringToBit(String message){
+	public int[] stringToBit(String message) {
 		byte[] octet = message.getBytes();
+		//System.out.println(octet[0]);
+		/*
+		 *
 		for(int i=0; i<octet.length;i++) {
 			System.out.print(octet[i] + " ");
 		}
 		System.out.println();
-		
+		*/
 		
 		int taille = octet.length;
 		int[] listebit = new int [ 8 * taille ]; //on admet ici que les bytes correspondent à des octets
@@ -52,46 +57,61 @@ public class Des<E> {
 			byte mot = octet[i];
 			
 			String motBinaire  = Integer.toString(mot,2);
-			System.out.println(motBinaire);
+			//System.out.println(motBinaire);
 			//converti le mot binaire String en int
 			
 			int[] petitTableau = new int[motBinaire.length()];
-			System.out.println("rempli tab");
-			for(int j = 0 ; j > motBinaire.length(); j++){
-				System.out.print(Character.getNumericValue((Character)motBinaire.charAt(j)));
-				petitTableau[j] = Integer.parseInt( motBinaire,j);
+			for(int j = 0 ; j < motBinaire.length(); j++){
+				petitTableau[j] = Character.getNumericValue((Character) motBinaire.charAt(j));
 			}
 			
 			//mettre ce petit tableau dans une case de notre liste de bit
-			System.out.println("\nrempli liste");
 			for (int j = 8-petitTableau.length; j< 8;j++) {
-				System.out.print(petitTableau[j - 8 + petitTableau.length]);
 				listebit[i*8+j] = petitTableau[j - 8 + petitTableau.length];
 			}
-			System.out.println();
 		}
-		
-		//affiche le tableau de bit
+		/*
+		 * affiche le tableau de bit
+		 * 
+		 *
 		for(int i = 0; i<listebit.length;i++) {
 			System.out.print(listebit[i]);
 		}
 		System.out.println();
-		
+		*/
 		return listebit;
 	}
 	
 	//decoupe en blocs un tableau de bit
-	public int[][] suiteBitToBloc(int[] suiteBit){
+	public int[][] suiteBitToBloc(int[] suiteBit, int taille_bloc){
 		
-		int taille = suiteBit.length;
-		int longueur = taille / this.taille_bloc; //decoupe en bloc de 8 par defaut
-		int[][] blocs = new int[longueur][this.taille_bloc];
+		int[] octetNulle = {
+				0,0,0,0,0,0,0,0
+		};
+
+		int longueur = suiteBit.length % taille_bloc; //decoupe en bloc de 64 par defaut
+		int[][] blocs = new int[longueur][taille_bloc];
+		ArrayList liste = new ArrayList();
+		for(int i = 0; i < longueur*taille_bloc  ;i++) {
+			try {
+				liste.add(suiteBit[i]);
+			} catch Exception e {
+				
+			}
+			
+		}
 		
+		
+		System.out.println("je suis passé là");
 		for(int i = 0; i<longueur; i++) {
-			for(int j = 0 ; j < this.taille_bloc ; j++) {
-				blocs[i][j] = suiteBit[ this.taille_bloc * i + j ];
+			for(int j = 0 ; j < taille_bloc ; j++) {
+				blocs[i][j] = suiteBit[ taille_bloc * i + j ];
+				System.out.println(blocs[i][j]+" "+suiteBit[ taille_bloc * i + j ]);
 			}
 		}
+		
+		
+		
 		
 		return blocs;
 	}
@@ -143,60 +163,29 @@ public class Des<E> {
 	
 	//convertir une chaine de bit en une suite de string
 	public String bitToString(int[] listebit) {
-		String mess = new String();
-		String octet = "";
-		for(int i = 0; i<listebit.length;i++) {
-			octet+=((Integer)listebit[i]).toString();
-			
-		}
-				
-		//morceau a convertir
-		
-		int tailleOctet = octet.length();
-		System.out.println(tailleOctet);
-		//affichage d'octet
-		for(int i = 1; i<tailleOctet; i++) {
-			System.out.print(octet.substring(i-1,i));
+		String mess = "";
+		/*
+		for(int i = 0;i<listebit.length;i++) {
+			System.out.print( listebit[i] );
 		}
 		System.out.println();
-		String[] tableauOctet = new String[tailleOctet/8];
-		Integer[] tabValOctet = new Integer[tailleOctet/8];
-		int j = 0;
-		while(tailleOctet/8 != j) {
-			tableauOctet[j] = octet.substring(j*8,j*8+8);
-			j++;
-		}
-		
+		*/
 		//convertir des series de blocs de 8 bits, en une valeur decimal
-		for(int i =0; i<tableauOctet.length;i++) {
-			tabValOctet[i]=0;
-			for(int m=7, k=0;m>-1 && k<8;m-- , k++) {
+		for(int i =0; i<listebit.length;i+=8) {
+			int lettre=0;
+			for(int m=8, k=0;m>0 && k<8;m-- , k++) {
 				int chiffre = 1;
 				for(int l = 0; l<m-1;l++) {
 					chiffre *= 2;
 				}
-				tabValOctet[i] += chiffre * Integer.parseInt(tableauOctet[i].substring(k,k+1));;
+				//System.out.println(listebit[k]+" "+chiffre);
+				lettre += chiffre * listebit[k];
 			}
-		}
-		
-		//affichage des octets
-		for(int i=0;i<tabValOctet.length;i++) {
-			System.out.print(tabValOctet[i]+" ");
-		}System.out.println();
-		
-		System.out.println(tableauOctet.length == tabValOctet.length);
-
-		//changer une valeur numérique en sa valeur
-		/* a changer pour prendre ne compte les carac spéciaux*/
-		for(int i = 0; i<tabValOctet.length;i++) {
+			//System.out.println(lettre);
+			mess += Character.toString((char) lettre );
 			
-			//pour gerer l'espace
-			if(tabValOctet[i]==64) {
-				tabValOctet[i]/=2;
-			}
-			
-			mess += ((char)((int)tabValOctet[i]));
 		}
+		//System.out.println(mess);
 		return mess;
 	}
 	
@@ -205,23 +194,22 @@ public class Des<E> {
 	public int[] crypte(String mess) {
 		int[] a = stringToBit(mess);
 		
-		int[][] b = suiteBitToBloc(a);	
 		
-		System.out.println("suite initiale");
+		int[][] b = suiteBitToBloc(a,this.taille_bloc);	
+		System.out.println("ici");
 		for(int i=0;i<b.length; i++) {
 			for(int j = 0; j<b[0].length;j++) {
 				System.out.print(b[i][j]);
 			}
 		}
-		
+		System.out.println("la");
 		int[][] c = permutAvant(b, this.perm_initiale);
-		System.out.println("\npermut avant:");
 		for(int i=0;i<c.length; i++) {
 			for(int j = 0; j<c[0].length;j++) {
 				System.out.print(c[i][j]);
 			}
 		}
-		
+		/*
 		int[][] c2 = permutArriere(c, this.perm_initiale);
 		System.out.println();
 		for(int i=0;i<c2.length; i++) {
@@ -230,7 +218,7 @@ public class Des<E> {
 			}
 		}
 		System.out.println("\npermut arriere");
-		
+		*/
 		
 		return a;
 	}

@@ -1,6 +1,6 @@
 
 # coding: utf-8
-from vect import *
+#from vect import *
 # # Partie 1 : Sur les arborescences
 # 
 # On considère une forêt d'arborescence donnée par son tableau des pères
