@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+<<<<<<< HEAD
 
 
 /*
@@ -18,6 +19,8 @@ import java.util.Random;
  * les methodes suiteBitToBlocs et separeEnSousblocs sont similaires, je pense que j'aurais pus mieux faire sur ce point
  */
 
+=======
+>>>>>>> c9c5a963d8ac36c612167b143af0ab99615cdfc7
 
 public class Des<E> {
 	
@@ -100,6 +103,7 @@ public class Des<E> {
 		
 		int longueur = suiteBit.length / taille_bloc +1; //decoupe en bloc de 64 par defaut
 		int[][] blocs = new int[longueur][taille_bloc];
+<<<<<<< HEAD
 		ArrayList<Integer> liste = new ArrayList<Integer>();
 		for(int i = 0; i < longueur*taille_bloc  ;i++) {
 			try {
@@ -109,6 +113,10 @@ public class Des<E> {
 			}
 			
 		}
+=======
+		ArrayList liste = new ArrayList();
+		
+>>>>>>> c9c5a963d8ac36c612167b143af0ab99615cdfc7
 		
 				
 		for(int i = 0; i<longueur ; i++) {
