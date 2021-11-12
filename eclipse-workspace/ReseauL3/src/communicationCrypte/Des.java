@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.sun.tools.javap.TryBlockWriter;
 
 public class Des<E> {
 	
@@ -92,14 +91,7 @@ public class Des<E> {
 		int longueur = suiteBit.length % taille_bloc; //decoupe en bloc de 64 par defaut
 		int[][] blocs = new int[longueur][taille_bloc];
 		ArrayList liste = new ArrayList();
-		for(int i = 0; i < longueur*taille_bloc  ;i++) {
-			try {
-				liste.add(suiteBit[i]);
-			} catch Exception e {
-				
-			}
-			
-		}
+		
 		
 		
 		System.out.println("je suis passé là");

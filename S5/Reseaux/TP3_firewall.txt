@@ -1,0 +1,35 @@
+Réseaux
+
+--------------
+TP3 Firewall
+--------------
+
+
+
+EXERCICE 1 : Coupure générale !
+
+a) on a bien accès a firefox.
+b) 
+# iptables -L
+
+> Chain INPUT (policy ACCEPT)
+> target     prot opt source               destination         
+>
+> Chain FORWARD (policy ACCEPT)
+> target     prot opt source               destination         
+>
+> Chain OUTPUT (policy ACCEPT)
+> target     prot opt source               destination
+
+c)# iptables -A OUTPUT -j DROP
+d)# iptables -A INPUT -j DROP
+
+
+pour réinitialiser :
+# iptables -F
+# iptables -X
+
+e) # iptables -L
+
+EXERCICE 2 : Remise en marche de quelques services
+

@@ -1,0 +1,101 @@
+# gpg --full
+$ 1
+
+# gpg --generate-key
+
+//entrer des paramètres de la clé
+$ 2048
+$ 0
+$ Real Name : FloDarPie
+$ email : flo.duzes@gmail.com
+$ comment : TP gpg
+
+$ passphrase : j'aime les banannes
+
+
+pub -> rsa2048 2021-10-26 [SC]
+       3B31C6624AE138F6C5B1BFD444A4A616C92C7314
+uid ->                   FloDarPie (TP gpg) <flo.duzes@gmail.com>
+sub -> rsa2048 2021-10-26 [E]
+
+gpg: key 44A4A616C92C7314 marked as ultimately trusted
+gpg: directory '/home/flodarpie/.gnupg/openpgp-revocs.d' created
+gpg: revocation certificate stored as '/home/flodarpie/.gnupg/openpgp-revocs.d/3B31C6624AE138F6C5B1BFD444A4A616C92C7314.rev'
+
+// cette passphrase sert de base pour generer la clé publique et privé
+// les champs 'pub' -> partie publique
+//            'sub' -> une sous-clé
+//            'uid' -> information user (nom et email)
+
+$ gpg --output DuzPubKey.gpg --armor --export
+//export la clé publique
+
+$ gpg --output DuzPrivKey.gpg --armor --export-secret-key
+//export la clé privé
+
+// --armor permet de convertir une clé binaire en fichier ASCII
+
+//on echange les clés public car les cles privés necessitent le passphrase
+
+$ gpg --import 'nomKey'
+###############################
+gpg: key F7BE4BABD090372E: public key "tcavai (Theo Cavailles) <theo.cavailles@etud.univ-jfc.fr>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+###############################
+
+//a priori je detiens les cles publiques
+
+
+$ gpg --list-key
+###############################
+/home/flodarpie/.gnupg/pubring.kbx
+----------------------------------
+pub   ed25519 2018-11-30 [SC]
+      248097092B458509C508DAC0350585C4E9518F26
+uid           [ unknown] proton@srp.modulus
+sub   cv25519 2018-11-30 [E]
+
+pub   rsa2048 2021-10-26 [SC]
+      3B31C6624AE138F6C5B1BFD444A4A616C92C7314
+uid           [ultimate] FloDarPie (TP gpg) <flo.duzes@gmail.com>
+sub   rsa2048 2021-10-26 [E]
+
+pub   rsa2048 2021-10-26 [SC]
+      01F2EB1B057657AB8045703FF7BE4BABD090372E
+uid           [ unknown] tcavai (Theo Cavailles) <theo.cavailles@etud.univ-jfc.fr>
+sub   rsa2048 2021-10-26 [E]
+
+pub   rsa2048 2021-10-26 [SC]
+      77777F6EC256D1C87F64F6032E78E8A9AECA6CD3
+uid           [ unknown] fauberva (Florian) <mecaman01@gmail.com>
+sub   rsa2048 2021-10-26 [E]
+###############################
+
+
+$ gpg --list-secret-key
+###############################
+/home/flodarpie/.gnupg/pubring.kbx
+----------------------------------
+sec   rsa2048 2021-10-26 [SC]
+      3B31C6624AE138F6C5B1BFD444A4A616C92C7314
+uid           [ultimate] FloDarPie (TP gpg) <flo.duzes@gmail.com>
+ssb   rsa2048 2021-10-26 [E]
+###############################
+
+
+$ gpg --recipient "FloDarPie" --encrypt mess.txt
+                    uid                 message en clair
+$ gpg --recipient "FloDarPie" --decrypt mess.txt.gpg
+                    uid                 message crypté
+
+
+$ gpg --default-key "FloDarPie" --armor --detach-sign mess.txt
+// pour generer une signature electronique de terminaison .asc
+
+$ gpg --verfy mess.txt.asc
+// pour verifier la signature d'un fichier
+
+
+
+

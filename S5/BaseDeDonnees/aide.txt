@@ -1,0 +1,5 @@
+$ sudo -i -u postgres
+$ psql
+
+commande à faire : 
+$ sudo -u postgres psql
