@@ -778,7 +778,6 @@ Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to
 	at java.base/java.security.cert.CertPathBuilder.build(CertPathBuilder.java:297)
 	at java.base/sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:434)
 	... 33 more
-<<<<<<< HEAD
 !SESSION 2021-10-24 21:32:08.072 -----------------------------------------------
 eclipse.buildId=4.21.0.I20210906-0500
 java.version=16.0.2
@@ -790,29 +789,12 @@ Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp
 !ENTRY org.eclipse.jface 2 0 2021-10-24 21:32:11.987
 !MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
 !SUBENTRY 1 org.eclipse.jface 2 0 2021-10-24 21:32:11.987
-=======
-!SESSION 2021-11-08 13:39:39.308 -----------------------------------------------
-eclipse.buildId=4.20.0.I20210611-1600
-java.version=11.0.11
-java.vendor=Ubuntu
-BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
-Framework arguments:  -product org.eclipse.epp.package.java.product
-Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
-
-!ENTRY org.eclipse.jface 2 0 2021-11-08 13:40:17.025
-!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
-!SUBENTRY 1 org.eclipse.jface 2 0 2021-11-08 13:40:17.025
->>>>>>> c9c5a963d8ac36c612167b143af0ab99615cdfc7
 !MESSAGE A conflict occurred for CTRL+SHIFT+T:
 Binding(CTRL+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
 		Open a type in a Java editor,
 		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6f428e6e,
-=======
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@43445fc6,
->>>>>>> c9c5a963d8ac36c612167b143af0ab99615cdfc7
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
@@ -820,7 +802,6 @@ Binding(CTRL+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
 		,
 		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
-<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@72e49f6a,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
@@ -1429,9 +1410,3 @@ org.eclipse.core.runtime.CoreException: Cannot determine URI for '/ReseauL3/src/
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1440)
 !SUBENTRY 2 org.eclipse.core.filebuffers 4 0 2021-10-24 21:32:13.317
 !MESSAGE Cannot determine URI for '/ReseauL3/src/communicationCrypte/Des.java'.
-=======
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@431babe6,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.ui.contexts.window,,,system)
->>>>>>> c9c5a963d8ac36c612167b143af0ab99615cdfc7
