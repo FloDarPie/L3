@@ -11,7 +11,6 @@
     <persistedState key="workingSets" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;workingSets/>"/>
     <persistedState key="aggregateWorkingSetId" value="Aggregate for window 1599418508470"/>
     <tags>topLevel</tags>
-    <tags>shellMaximized</tags>
     <children xsi:type="basic:PartSashContainer" xmi:id="_g_0l0jTFEeyK9_MDOhXuCA" selectedElement="_g_0l0zTFEeyK9_MDOhXuCA" horizontal="true">
       <children xsi:type="advanced:PerspectiveStack" xmi:id="_g_0l0zTFEeyK9_MDOhXuCA" elementId="org.eclipse.ui.ide.perspectivestack" containerData="7500" selectedElement="_g_0l8DTFEeyK9_MDOhXuCA">
         <children xsi:type="advanced:Perspective" xmi:id="_g_0l1DTFEeyK9_MDOhXuCA" elementId="org.eclipse.jdt.ui.JavaPerspective" selectedElement="_g_0l1TTFEeyK9_MDOhXuCA" label="Java" iconURI="platform:/plugin/org.eclipse.jdt.ui/$nl$/icons/full/eview16/jperspective.png">
@@ -370,7 +369,7 @@
           <children xsi:type="basic:PartSashContainer" xmi:id="_g_10zjTFEeyK9_MDOhXuCA" containerData="5098" selectedElement="_g_101DTFEeyK9_MDOhXuCA">
             <children xsi:type="basic:PartStack" xmi:id="_g_10zzTFEeyK9_MDOhXuCA" elementId="PartStack@8d52268" containerData="6452" selectedElement="_g_100DTFEeyK9_MDOhXuCA">
               <children xsi:type="basic:Part" xmi:id="_g_100DTFEeyK9_MDOhXuCA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Main.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
-                <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Main.java&quot; partName=&quot;Main.java&quot; title=&quot;Main.java&quot; tooltip=&quot;ReseauL3/src/communicationCrypte/Main.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/ReseauL3/src/communicationCrypte/Main.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;2032&quot; selectionTopPixel=&quot;1295&quot;/>&#xA;&lt;/editor>"/>
+                <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Main.java&quot; partName=&quot;Main.java&quot; title=&quot;Main.java&quot; tooltip=&quot;ReseauL3/src/communicationCrypte/Main.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/ReseauL3/src/communicationCrypte/Main.java&quot;/>&#xA;&lt;/editor>"/>
                 <tags>Editor</tags>
                 <tags>removeOnHide</tags>
                 <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
@@ -388,7 +387,7 @@
         <children xsi:type="basic:PartStack" xmi:id="_g_101jTFEeyK9_MDOhXuCA" elementId="PartStack@5a294c59" containerData="5482" selectedElement="_g_101zTFEeyK9_MDOhXuCA">
           <tags>active</tags>
           <children xsi:type="basic:Part" xmi:id="_g_101zTFEeyK9_MDOhXuCA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Des.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
-            <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Des.java&quot; partName=&quot;Des.java&quot; title=&quot;Des.java&quot; tooltip=&quot;ReseauL3/src/communicationCrypte/Des.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/ReseauL3/src/communicationCrypte/Des.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;2431&quot; selectionTopPixel=&quot;798&quot;/>&#xA;&lt;/editor>"/>
+            <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Des.java&quot; partName=&quot;Des.java&quot; title=&quot;Des.java&quot; tooltip=&quot;ReseauL3/src/communicationCrypte/Des.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/ReseauL3/src/communicationCrypte/Des.java&quot;/>&#xA;&lt;/editor>"/>
             <tags>Editor</tags>
             <tags>removeOnHide</tags>
             <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
@@ -645,7 +644,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_g_2bSDTFEeyK9_MDOhXuCA" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_2PKosDTWEey4bvj0DzU42g" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_g_9IxDTFEeyK9_MDOhXuCA"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_FgkkIDUBEeywoY2wL5Hijg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_g_9IxDTFEeyK9_MDOhXuCA"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_g_2bVTTFEeyK9_MDOhXuCA" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -676,7 +675,10 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_g_3CGjTFEeyK9_MDOhXuCA" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_2PZSMDTWEey4bvj0DzU42g" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_g_8itTTFEeyK9_MDOhXuCA"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_FgnncDUBEeywoY2wL5Hijg" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_g_8itTTFEeyK9_MDOhXuCA"/>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_FpKfcDUBEeywoY2wL5Hijg" elementId="org.eclipse.jdt.ui.CompilationUnitEditor" visible="false">
+        <tags>Draggable</tags>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_g_3CJjTFEeyK9_MDOhXuCA" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -992,10 +994,6 @@
     <bindings xmi:id="_g_3pJDTFEeyK9_MDOhXuCA" keySequence="CTRL+K" command="_g_8iQzTFEeyK9_MDOhXuCA"/>
     <bindings xmi:id="_g_3pJTTFEeyK9_MDOhXuCA" keySequence="ALT+CTRL+ARROW_LEFT" command="_g_9I3DTFEeyK9_MDOhXuCA"/>
     <bindings xmi:id="_g_3pJjTFEeyK9_MDOhXuCA" keySequence="ALT+CTRL+ARROW_RIGHT" command="_g_--EDTFEeyK9_MDOhXuCA"/>
-    <bindings xmi:id="_g_3pJzTFEeyK9_MDOhXuCA" keySequence="CTRL+&#xc8;" command="_g_8i4TTFEeyK9_MDOhXuCA">
-      <tags>locale:fr</tags>
-      <parameters xmi:id="_g_3pKDTFEeyK9_MDOhXuCA" elementId="Splitter.isHorizontal" name="Splitter.isHorizontal" value="false"/>
-    </bindings>
   </bindingTables>
   <bindingTables xmi:id="_g_3pKTTFEeyK9_MDOhXuCA" elementId="org.eclipse.jdt.ui.javaEditorScope" bindingContext="_g_3p1zTFEeyK9_MDOhXuCA">
     <bindings xmi:id="_g_3pKjTFEeyK9_MDOhXuCA" keySequence="CTRL+SHIFT+P" command="_g_8iaTTFEeyK9_MDOhXuCA"/>
@@ -1938,7 +1936,7 @@
   </commands>
   <commands xmi:id="_g_8iSDTFEeyK9_MDOhXuCA" elementId="org.eclipse.egit.ui.history.Merge" commandName="Merge" category="_g_--VTTFEeyK9_MDOhXuCA"/>
   <commands xmi:id="_g_8iSTTFEeyK9_MDOhXuCA" elementId="org.eclipse.ui.window.switchToEditor" commandName="Switch to Editor" description="Switch to an editor" category="_g_--RjTFEeyK9_MDOhXuCA"/>
-  <commands xmi:id="_g_8iSjTFEeyK9_MDOhXuCA" elementId="org.eclipse.ui.help.dynamicHelp" commandName="Show Contextual Help" description="Open the contextual help" category="_g_--SDTFEeyK9_MDOhXuCA"/>
+  <commands xmi:id="_g_8iSjTFEeyK9_MDOhXuCA" elementId="org.eclipse.ui.help.dynamicHelp" commandName="Show Context Help" description="Open the contextual help" category="_g_--SDTFEeyK9_MDOhXuCA"/>
   <commands xmi:id="_g_8iSzTFEeyK9_MDOhXuCA" elementId="org.eclipse.ui.navigate.nextSubTab" commandName="Next Sub-Tab" description="Switch to the next sub-tab" category="_g_--PzTFEeyK9_MDOhXuCA"/>
   <commands xmi:id="_g_8iTDTFEeyK9_MDOhXuCA" elementId="org.eclipse.jdt.ui.edit.text.java.comment" commandName="Comment" description="Turn the selected lines into Java comments" category="_g_--UjTFEeyK9_MDOhXuCA"/>
   <commands xmi:id="_g_8iTTTFEeyK9_MDOhXuCA" elementId="org.eclipse.jdt.ui.edit.text.java.introduce.parameter" commandName="Introduce Parameter" description="Introduce a new method parameter based on the selected expression" category="_g_--RzTFEeyK9_MDOhXuCA"/>

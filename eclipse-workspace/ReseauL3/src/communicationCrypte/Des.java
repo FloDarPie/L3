@@ -1,10 +1,23 @@
 package communicationCrypte;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
-import com.sun.tools.javap.TryBlockWriter;
+
+
+/*
+ * @Author 
+ * Duzes Florian
+ * L3
+ * 
+ * acheve le 24/10/2021
+ * 
+ * 
+ * 
+ * les methodes suiteBitToBlocs et separeEnSousblocs sont similaires, je pense que j'aurais pus mieux faire sur ce point
+ */
+
 
 public class Des<E> {
 	
@@ -85,32 +98,27 @@ public class Des<E> {
 	//decoupe en blocs un tableau de bit
 	public int[][] suiteBitToBloc(int[] suiteBit, int taille_bloc){
 		
-		int[] octetNulle = {
-				0,0,0,0,0,0,0,0
-		};
-
-		int longueur = suiteBit.length % taille_bloc; //decoupe en bloc de 64 par defaut
+		int longueur = suiteBit.length / taille_bloc +1; //decoupe en bloc de 64 par defaut
 		int[][] blocs = new int[longueur][taille_bloc];
-		ArrayList liste = new ArrayList();
+		ArrayList<Integer> liste = new ArrayList<Integer>();
 		for(int i = 0; i < longueur*taille_bloc  ;i++) {
 			try {
 				liste.add(suiteBit[i]);
-			} catch Exception e {
-				
+			} catch (Exception e) { //on bourre les octets restants avec des zeros
+				liste.add(0);
 			}
 			
 		}
 		
-		
-		System.out.println("je suis passé là");
-		for(int i = 0; i<longueur; i++) {
+				
+		for(int i = 0; i<longueur ; i++) {
 			for(int j = 0 ; j < taille_bloc ; j++) {
-				blocs[i][j] = suiteBit[ taille_bloc * i + j ];
-				System.out.println(blocs[i][j]+" "+suiteBit[ taille_bloc * i + j ]);
+				blocs[i][j] = (int) liste.get( taille_bloc * i + j );
+
 			}
 		}
 		
-		
+		System.out.println();
 		
 		
 		return blocs;
@@ -129,23 +137,61 @@ public class Des<E> {
 	}
 	
 	
-	//separe un bloc en deux objet G et D
-	
+	//separe un bloc de taille 64 en deux objet G et D
+	public int[][] separeEnSousblocs (int[] bloc){
+		int[] g = new int[this.sous_bloc];
+		int[] d = new int[this.sous_bloc];
+		for (int i = 0; i < d.length; i++) {
+			g[i] = bloc[i];
+			d[i] = bloc[i+this.sous_bloc];
+		}
+		int[][] rep = {
+				g,d
+		};
+		return rep;
+		
+	}
 	
 	/*
 	 * Construction d'une ronde
 	 */
+	
+	public int[] XOR(int[] a ,int[] b) {
+		int[] retour = new int[a.length];
+		for (int i = 0; i < retour.length; i++) {
+			retour[i] = (2 - a[i] - b[i]) % 2;// (2 -0) %2 = O | (2 -1) %2 = 1 | (2 -2) %2 = O
+		}
+		return retour;
+	
 	//construire une clé K
 	
 	// new G = D
 	
 	// new D = G XOR f(K,D)
+
+	}
 	
 	/*
 	 * Fin de ronde
 	 */
 	
 	//recolle G et D
+	public int[] soudeSousblocs(int[][] blocs) {
+		ArrayList<Integer> liste = new ArrayList<Integer>();
+		for (int i = 0; i < blocs.length; i++) {
+			for (int j = 0; j < blocs[0].length; j++) {
+				liste.add(blocs[i][j]);
+			}
+		}
+		
+		
+		int[] bloc = new int[this.taille_bloc];
+		for (int i = 0; i < bloc.length; i++) {
+			bloc[i] = liste.get(i);
+		}
+		
+		return bloc;
+	}
 	
 	// permutation inverse finale
 	public int[][] permutArriere(int[][] blocs, int[] reference) {		
@@ -153,7 +199,7 @@ public class Des<E> {
 		
 		for(int i = 0; i<blocs.length; i++) {
 			for (int j = 0; j<reference.length; j++)
-			blocs[i][reference[j]-1] = blocsPermute[i][j];;
+				blocsPermute[i][j] =blocs[i][reference[j]-1] ;;
 		}
 		return blocsPermute;
 	}
@@ -173,7 +219,7 @@ public class Des<E> {
 		//convertir des series de blocs de 8 bits, en une valeur decimal
 		for(int i =0; i<listebit.length;i+=8) {
 			int lettre=0;
-			for(int m=8, k=0;m>0 && k<8;m-- , k++) {
+			for(int m=8, k=i;m>0 && k<i+8;m-- , k++) {
 				int chiffre = 1;
 				for(int l = 0; l<m-1;l++) {
 					chiffre *= 2;
@@ -196,30 +242,12 @@ public class Des<E> {
 		
 		
 		int[][] b = suiteBitToBloc(a,this.taille_bloc);	
-		System.out.println("ici");
-		for(int i=0;i<b.length; i++) {
-			for(int j = 0; j<b[0].length;j++) {
-				System.out.print(b[i][j]);
-			}
-		}
-		System.out.println("la");
-		int[][] c = permutAvant(b, this.perm_initiale);
-		for(int i=0;i<c.length; i++) {
-			for(int j = 0; j<c[0].length;j++) {
-				System.out.print(c[i][j]);
-			}
-		}
-		/*
-		int[][] c2 = permutArriere(c, this.perm_initiale);
-		System.out.println();
-		for(int i=0;i<c2.length; i++) {
-			for(int j = 0; j<c2[0].length;j++) {
-				System.out.print(c2[i][j]);
-			}
-		}
-		System.out.println("\npermut arriere");
-		*/
 		
+		int[][] c = permutAvant(b, this.perm_initiale);
+		
+		int[][] c2 = permutArriere(c, this.perm_initiale);
+		
+		int[] d = soudeSousblocs(c2);
 		return a;
 	}
 
@@ -231,53 +259,5 @@ public class Des<E> {
 		return mess;
 	}
 
-	
-	/*
-	 * @Author
-	 * DuzesFlorian
-	 * Premiere tentative
-	 * Garder en memoire
-	 * 
-	 *
-	public byte[][] crypte(String mess) {
-		byte[] bit = mess.getBytes();
-		int n = 8;
-		int taille = bit.length/n;		
-		byte[][] blocs = new byte[taille][n];
-		
-		for(int j=0; j<taille;j++ ) {
-			blocs[j] = Arrays.copyOfRange(bit, j*8,8+j*8);
-		}
-		//this.permutation(blocs);
-		return blocs;
-		
-	}
-	
-	
-	public void permutation(byte[][] blocs){
-		
-		for(int i=0; i < blocs.length;i++) {
-			
-		}
-		
-	}
-	
-	public String decrypte(byte[][] messCrypte) {
-		String b = new String();
 
-		return b;
-		
-		
-	}
-	
-	public static void main(String[] args) {
-		Des d = new Des();
-		byte[][] messCrypte = d.crypte("salut");
-		System.out.println(messCrypte);
-		d.StringToBit("s");
-		String info = d.decrypte(messCrypte);
-		System.out.println(info);
-		
-	}
-	*/
 }
