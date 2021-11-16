@@ -1,0 +1,2 @@
+module chat2 {
+}

@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
 import unittest
-from tp1_partie2_correction import *
-
 
 #  _____     _   _                    _             _                  
 # |_   _| __(_) | |_ ___  _ __   ___ | | ___   __ _(_) __ _ _   _  ___ 
@@ -10,9 +8,28 @@ from tp1_partie2_correction import *
 #   | || |  | | | || (_) | |_) | (_) | | (_) | (_| | | (_| | |_| |  __/
 #   |_||_|  |_|  \__\___/| .__/ \___/|_|\___/ \__, |_|\__, |\__,_|\___|
 #                        |_|                  |___/      |_|           
-def triTopo(G):
-	#TODO code ici
-	return []
+def triTopo(M):
+	listeOrdonnancement = []
+	#source : sommet dont le degré entrant est nul
+	#puit : sommet dont le degré sortant est nul
+
+	G = {
+		i : 0 for i in M
+	}
+	degréEntrant = {}
+	for sommet in G:
+		for voisin in G[sommet]:
+			G[voisin]+=1
+
+	return G
+
+	listeSource = [ a for a in G if G[a]==0 ]
+
+	for source in listeSource:
+
+
+
+	#return listeOrdonnancement
 
 #  _____     _                            _                            
 # |_   _| __(_)  _ __   __ _ _ __   _ __ (_)_   _____  __ _ _   ___  __
