@@ -10,6 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.Buffer;
+import java.util.Scanner;
 
 public class Main {
 	
@@ -17,19 +18,37 @@ public class Main {
 	/*
 	 * Configuration des informations sur le serveur de communication
 	 */
+	String lien = "192.168.206.194";
+	int port = 4444;
+		
+		
 		
 	System.out.println("Lancement socket");
-		Socket echoSocket = null;
-		PrintWriter out = null;
-		BufferedReader in = null;
+	Socket echoSocket = null;
+	final PrintWriter out = null;
+	BufferedReader in = null;
+	
 	//System.out.println(InetAddress.getByName("calm-tiger-56.loca.lt"));
 	try{
-		InetAddress serveur = InetAddress.getByName("tender-moose-2.loca.lt");
-		System.out.println(serveur);
-		echoSocket = new Socket("193.34.76.44", 4444) ;
+		//connexion
+		echoSocket = new Socket(lien, port) ;
 		out = new PrintWriter(echoSocket.getOutputStream()) ;
 		in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream())) ;
 		System.out.println("Socket lancé");
+		//discussion
+		Scanner mess = new Scanner(System.in);
+		Thread envoi = new Thread(new Runnable() {
+			String msg;
+			@Override
+			public void run() {
+				while(true) {
+					msg = mess.nextLine();
+					out.println(msg);
+					out.flush();
+				}
+			}
+			
+		});
 	}
 	catch(UnknownHostException e){
 		System.out.println("« Destination unknown »") ;
@@ -41,6 +60,8 @@ public class Main {
 		System.exit(-1) ;
 			}
 	
+	System.out.println("////////\nInitialisation du Chat :");
+	
 	BufferedReader stdn = new BufferedReader(
 			new InputStreamReader(System.in)
 			);
@@ -48,7 +69,7 @@ public class Main {
 	
 	while ((userInput = stdn.readLine()) != null){
 		out.println(userInput);
-		System.out.println("echo :" + in.readLine());
+		System.out.println("inconnu :" + in.readLine());
 	}
 
 	out.close();
