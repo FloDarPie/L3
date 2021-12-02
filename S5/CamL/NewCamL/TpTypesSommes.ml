@@ -52,3 +52,8 @@ let sommeRC (RC(a,b)) (RC(c,d)) = RC (somme a c, somme b d)
 ;;
 
 sommeRC (RC (N 4, N 8 )) (RC (R 2.3, N 3));;
+
+let prodRC (RC(a,b)) (RC(c,d)) = RC (prod a c, prod b d)
+;;
+
+sommeRC (RC (N 4, N 8 )) (RC (R 2.3, N 3));;

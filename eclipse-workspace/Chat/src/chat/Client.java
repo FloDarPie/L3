@@ -17,10 +17,6 @@ public class Client {
 	};
 	
 	Boolean baliseFin = true;
-	
-	
-	
-	
 	Thread recevoir = null;
 	Thread envoyer = null;
 	Socket echoSocket = null;
@@ -77,7 +73,7 @@ public class Client {
 	               try {
 	            	 message = in.readLine();
 	                 while(message!=null){
-	                    System.out.println("Serveur : "+message);
+	                    System.out.println(message);
 	                    if(conditionArret(message)) {
 	                    	Quit();
 	                    }
