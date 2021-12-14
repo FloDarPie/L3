@@ -1,3 +1,5 @@
+package chat;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Server {
+public class Serveur {
 
     private class Client {
         public Socket socket;
@@ -45,7 +47,7 @@ public class Server {
         
     final Scanner scanner = new Scanner(System.in);
     
-    public Server() {
+    public Serveur() {
         // 1. definition du serveur
         try { server = new ServerSocket(55555); }
         catch(IOException error) { error.printStackTrace(); System.exit(-1); }
@@ -120,6 +122,7 @@ public class Server {
     }
     
     public static void main(String[] args) {
-        new Server();
+        new Serveur();
     }
 }
+

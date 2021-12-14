@@ -74,3 +74,6 @@ CREATE TABLE Reservation (
     CONSTRAINT coupleVolCLient PRIMARY KEY (noVol,noClient)
     --[#noVol (Vol), #noClient (Client) ] (PK) 
     );
+
+    
+    INSERT INTO Reservation(longueur, noImm, dateD,dateF) VALUES ( 12, 103, '2021-11-03','2021-11-29');
