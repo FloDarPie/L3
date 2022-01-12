@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<style>
+
+table { border-collapse: collapse; }
+
+td {
+	width:20px;
+	height:20px;
+	padding: 0;
+	border-spacing: 0;
+	border: 1px solid gray;
+	cursor: pointer;
+	user-select: none;
+}
+
+td.aqua	{ background-color: aqua; }
+td.blue { background-color: blue; } 
+td.fuchsia { background-color: fuchsia; } 
+td.gray { background-color: gray; }
+td.green { background-color: green; }
+td.lime { background-color: lime; }
+td.maroon { background-color: maroon; }
+td.navy { background-color: navy; }
+td.olive { background-color: olive; }
+td.purple { background-color: purple; }
+td.red { background-color: red; }
+td.silver { background-color: silver; }
+td.teal { background-color: teal; }
+td.yellow { background-color: yellow; }
+
+</style>
+
+<body>
+	<table id="gameBoard"></table>
+</body>
+
+<script>
+
+	colors = ['aqua', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'yellow' ];
+
+	var canvas = new Array(25);
+	for (var i=0; i<canvas.length; i++) {
+		canvas[i] = new Array(25);
+		for (var j=0; j<canvas[i].length; j++) {
+			canvas[i][j] = 'white';
+		}
+	}
+
+	$(document).ready(function() {
+	
+		for (var i=0; i<25; i++) {
+			var newLine = $('<tr></tr>');
+			for (var j=0; j<25; j++) {
+				$(newLine).append('<td class="'+canvas[i][j]+'" data-col='+i+' data-row='+j+'></td>');
+			}
+			$('#gameBoard').append(newLine);
+		}
+		
+		$('td').click(function() {
+			let col = $(this).attr('data-col');
+			let row = $(this).attr('data-row');
+			let randomColor = colors[Math.floor(Math.random() * colors.length)];
+			canvas[col][row] = randomColor;
+			refresh();
+		});
+
+		function refresh() {
+			for (var col=0; col<canvas.length; col++)
+				for (var row=0; row<canvas[col].length; row++) {
+					$('tr:nth-child('+(col+1)+') td:nth-child('+(row+1)+')').removeClass().addClass(canvas[col][row]);
+				}
+		}
+		
+	});
+
+
+</script>
+</html>
