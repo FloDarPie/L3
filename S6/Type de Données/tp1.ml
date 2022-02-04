@@ -108,5 +108,97 @@ remove_assoc "Martin" liste;;
 lookup_assoc "k" (add_assoc "k" 3 liste) = Some 3;;
 
 (*MAP*)
-
+(*
 type (’k, ’v) map = ’k -> ’v option;;
+
+Exercice 6 --*)
+
+module Mymap = Map.Make(String);;
+
+let lookup_map cle map = Mymap.find cle map;;
+
+let add_map cle valeur map = Mymap.add cle valeur map;;
+
+let remove_map cle valeur map = Mymap.remove cle map;;
+
+
+let empty_map = 
+        let map = Mymap.empty
+ in map ;;
+ 
+ 
+let assoc2map liste = 
+    let map = empty_map in
+        let rec ajout liste map = match liste with 
+        | (a,b)::c -> ajout c (add_map a b map)
+        |_ -> map
+    in ajout liste map
+;;
+
+
+lookup_map "Nicole" (assoc2map [("Max",10);("Nicolas",4);("Nicole",9)]);;
+
+
+
+type ('k, 'v) map = 'k -> 'v option;;
+
+let mymap:(string,int) map = function
+    "Max" -> Some 10
+    |"Nicolas" -> Some 4
+    |"Nicole" -> Some 9
+    |_ -> None;;
+
+let lookup_map cle map = map cle;;
+lookup_map "Max" mymap;;
+lookup_map "Maxime" mymap;;
+
+let add_map cle valeur map = fun cle2 -> if cle2=cle then Some valeur else map cle2;;
+
+let map2 = add_map "Jo" 24 mymap;;
+lookup_map "Jo" map2;;
+lookup_map "Max" map2;;
+
+let remove_map cle map = fun cle2 -> if cle2 = cle then None else map cle2;;
+
+let map3 = remove_map "Jo" map2;;
+lookup_map "Jo" map3;;
+lookup_map "Nicole" map3;;
+
+let empty_map = fun _ -> None;;
+
+let map4 = empty_map;;
+let map5 = add_map "Nico" 10 map4;;
+lookup_map "Nico" map5;;
+
+let assoc2map liste = 
+    let map = empty_map in
+    let rec rempli map liste = match liste with
+        |(a,b)::c -> rempli (add_map a b map) c
+        |_ -> map
+    in rempli map liste
+;;
+
+lookup_map "Nicole" (assoc2map [("Max",10);("Nicolas",4);("Nicole",9)]);;
+
+
+(*Exercice 7 --
+
+Règle de typage élémentaires
+*)
+
+let tp_of_expr_App a b = ( b, Abs a) 
+    
+
+
+let rec tp_of_expr environnement expression = match expression with
+    | ConsT IntT = IntT 
+    | ConsT BoolT = BoolT
+    | ConsT a = (tp_of_expr a environnement)::environnement
+    | Const a = a
+    | BoolE a = a
+    
+    
+    | Abs (lettre, objet, Var l) = 
+    | App (a,b) = (*Verification a faire*)
+    |
+
