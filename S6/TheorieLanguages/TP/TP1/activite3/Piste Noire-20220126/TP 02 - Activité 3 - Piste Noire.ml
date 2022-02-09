@@ -19,10 +19,24 @@ let a2 = {sigma= ['a';'b'] ; nQ = 3; init = 1 ;
 				|3 -> {accept = true ;
 				      t = function 
 					       'a'->3
-						   |'b'->3   }		   				
+						   |'b'->3   }
 		};;
 
-		
+(******************* GET STARTED *******************)
+
+
+let complete automate = 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
