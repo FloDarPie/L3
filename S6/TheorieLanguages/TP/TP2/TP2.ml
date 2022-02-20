@@ -91,23 +91,28 @@ let transitN = fun (aut, i, c) ->
 (* --------------------------------------------------------- *)
 				(* Le calcul des clotures *)
 
+let eTransitionOuVide (aut : afn) (i : int) = 
+   try i::transitN(aut,i,'e') 
+   with  PasTransition -> [i];;
+(*eTransitionOuVide : afn -> int -> int list *)
+
+let rec eTransitionOuVideListe (aut : afn) (li : int list) = match li with
+	| i :: q -> union (eTransitionOuVide aut i) (eTransitionOuVideListe aut q)
+	| [] -> [] ;; 
+(*eTransitionOuVideListe : afn -> int list -> int list*)
 
 
-let cloture automate sommet =
-    
-    let liste = [ sommet ] in 
-    let maCloture = [] in 
-    
-    let rec parcour liste = match liste with
-        | a::b -> (automate.eN a ).tN 'e' )@liste || parcour liste
-        | [] -> (automate.eN sommet).tN 'e' )::maCloture in
-    
-    parcour liste
-;;
+let rec parcours (aut : afn) (li : int list) = 
+	let li2 = eTransitionOuVideListe aut li in 
+	if longueur li = longueur li2 
+	then li 
+	else parcours aut li2 ;;
+(*parcours : afn -> int list -> int list*)	
 
-cloture an1 1;;
+let cloture (aut : afn) (etat : int) = parcours aut [etat] ;;
+(*cloture : afn -> int -> int list*)
 
-(*
+
 
 (*                    Tests                   *)
 
@@ -117,20 +122,27 @@ let clotureDansAN2 = cloture an2 ;;		(* clotureDansAN2 : int -> int list *)
 List.map clotureDansAN1 [1;2;3;4] ;;
 (*int list list = [[2; 3; 1; 4]; [4; 2; 1; 3]; [2; 3; 1; 4]; [4; 2; 1; 3]] *)
 List.map clotureDansAN2 [1;2;3;4] ;;
-(*int list list = [[2; 3; 1; 4]; [4; 2; 1; 3]; [2; 3; 1; 4]; [4; 2; 1; 3]] *)
+(*int list list = [[1]; [4; 2; 3]; [3; 4]; [4]] *)
 
 
 (* --------------------------------------------------------- *)
 				(* Les nouveaux états acceptants *)
 
-				
+let nouvelEtatAcceptant aut etat = 
 
-				
-				
-				
-				
-				
+    (*Prendre la cloture de l'etat *)
+    let liste = cloture aut etat in 
+    
+    
+    let rec parcours liste = match liste with
+    | a::b -> (aut.eN a).acceptN || parcours b
+    | [] -> false
+    
+    in
+    
+    parcours liste
 
+;;
 
 (*                    Tests                   *)
 
@@ -146,16 +158,24 @@ List.map nouveauxAcceptantsAN2 [1;2;3;4] ;;
 				(* Calcul des transitions étendues *)
 
 
+let transitionsEtendues aut _char etat = 
 
-				
-				
-				
-				
-				
-				
-				
-				
-			
+    (*Prendre la cloture de l'etat *)
+    let liste = cloture aut etat in 
+    
+    
+    let rec parcours liste = match liste with
+     [] -> []
+    | a::b -> union
+                ( try ((aut.eN a).tN _char) with Match_failure _ -> []) 
+                (parcours b)
+    
+    in
+    
+    parcours liste
+;;
+
+transitionsEtendues an2 'a' 2;;
 
 (*                    Tests                   *)
 
@@ -173,18 +193,19 @@ List.map tN_AN2_b [1;2;3;4] ;;
 			(* Construction du nouvel automate *)
 
 
-
-
-
-
-
-
-
-
+let nouvelAuto aut =
+   {sigmaN = aut.sigmaN;
+   nN = aut.nN;
+   initN = aut.initN;
+   eN = function etat ->
+            {acceptN = nouvelEtatAcceptant aut etat;
+            tN = function (_char:char) -> (transitionsEtendues aut _char etat:int list)}
+        } 
+    ;;
 
 
 (*                    Tests                   *)
+let automate1 = nouvelAuto an1;;
+let automate2 = nouvelAuto an2;;
 
-
-
-*)
+(automate1.eN 1).acceptN;;
