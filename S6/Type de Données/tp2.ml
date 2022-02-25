@@ -71,27 +71,14 @@ Exercice 2 *)
 
 (* [X ← f (Y ), Y ← g(a)]*)
 
+let sub2 = ( "Y", Appl ("g", [ Appl("a", [] ) ]));;
 
-let sub1 = [
-        (Var "X", Appl ("f" , [Var "Y"]))
-        ]
-;;
-
-
-let sub2 = [
-        (Var "Y", g)
-        ]
-;;
-
-let sub3 = sub1 @ sub2 ;;
+let rec lookup cle liste = match liste with
+    | a::b -> if a = cle then a
+                              else lookup cle b
+    | [] -> cle;;
 
 
-
-
-let rec lookup_assoc cle liste = match liste with
-    | (a,b)::c -> if a = cle then b
-                              else lookup_assoc cle c
-    | [] -> None;;
 
 let rec subst terme substitution = 
     
@@ -101,8 +88,18 @@ let rec subst terme substitution =
 
     in
     match terme with
-    | Var a -> lookup_assoc (Var a) substitution
+    | Var a -> [lookup (Var a) substitution]
     | Appl ( _ , liste) -> substAux liste 
                 
 ;;
 
+ let rec subst (chgt,cible) terme = match terme with
+    | Var a -> if chgt = a then cible else Var a 
+    | Appl( f, arg) -> Appl(f, List.map(subst (chgt,cible)) arg)
+;;
+
+
+let test = Appl("f", [Appl( "g" , [Appl("a", [] )]) ; Appl ("h", [Var "Y" ; Var "X"])]);;
+
+subst sub2 g;;
+subst sub2 test;;
