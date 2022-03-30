@@ -68,6 +68,7 @@ CREATE TABLE Exemplaire(
 	CONSTRAINT fkExemplaireClient REFERENCES Client(noClient),
 	dateAchat DATE DEFAULT CURRENT_DATE -- manquait valeur par défaut
 	);
+	
 CREATE TABLE Contrat(
 	unAuteur INT
     CONSTRAINT fkContratAuteur REFERENCES Auteur(noAuteur),

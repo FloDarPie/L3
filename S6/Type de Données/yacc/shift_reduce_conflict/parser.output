@@ -1,0 +1,102 @@
+   0  $accept : %entry% $end
+
+   1  start : expr EOL
+
+   2  expr : INTCONST
+   3       | expr PLUS expr
+   4       | expr TIMES expr
+
+   5  %entry% : '\001' start
+
+state 0
+	$accept : . %entry% $end  (0)
+
+	'\001'  shift 1
+	.  error
+
+	%entry%  goto 2
+
+
+state 1
+	%entry% : '\001' . start  (5)
+
+	INTCONST  shift 3
+	.  error
+
+	expr  goto 4
+	start  goto 5
+
+
+state 2
+	$accept : %entry% . $end  (0)
+
+	$end  accept
+
+
+state 3
+	expr : INTCONST .  (2)
+
+	.  reduce 2
+
+
+state 4
+	start : expr . EOL  (1)
+	expr : expr . PLUS expr  (3)
+	expr : expr . TIMES expr  (4)
+
+	EOL  shift 6
+	PLUS  shift 7
+	TIMES  shift 8
+	.  error
+
+
+state 5
+	%entry% : '\001' start .  (5)
+
+	.  reduce 5
+
+
+state 6
+	start : expr EOL .  (1)
+
+	.  reduce 1
+
+
+state 7
+	expr : expr PLUS . expr  (3)
+
+	INTCONST  shift 3
+	.  error
+
+	expr  goto 9
+
+
+state 8
+	expr : expr TIMES . expr  (4)
+
+	INTCONST  shift 3
+	.  error
+
+	expr  goto 10
+
+
+state 9
+	expr : expr . PLUS expr  (3)
+	expr : expr PLUS expr .  (3)
+	expr : expr . TIMES expr  (4)
+
+	TIMES  shift 8
+	EOL  reduce 3
+	PLUS  reduce 3
+
+
+state 10
+	expr : expr . PLUS expr  (3)
+	expr : expr . TIMES expr  (4)
+	expr : expr TIMES expr .  (4)
+
+	.  reduce 4
+
+
+8 terminals, 4 nonterminals
+6 grammar rules, 11 states

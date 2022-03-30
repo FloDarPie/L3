@@ -1,0 +1,1 @@
+\echo [Question 6] - Non realisé

@@ -1,0 +1,169 @@
+   0  $accept : %entry% $end
+
+   1  start : expr EOL
+
+   2  expr : INTCONST
+   3       | expr PLUS expr
+   4       | PARES_OUV expr PARES_FERM
+   5       | CRO_OUV expr CRO_FERM
+   6       | ACO_OUV expr ACO_FERM
+
+   7  %entry% : '\001' start
+
+state 0
+	$accept : . %entry% $end  (0)
+
+	'\001'  shift 1
+	.  error
+
+	%entry%  goto 2
+
+
+state 1
+	%entry% : '\001' . start  (7)
+
+	INTCONST  shift 3
+	PARES_OUV  shift 4
+	CRO_OUV  shift 5
+	ACO_OUV  shift 6
+	.  error
+
+	expr  goto 7
+	start  goto 8
+
+
+state 2
+	$accept : %entry% . $end  (0)
+
+	$end  accept
+
+
+state 3
+	expr : INTCONST .  (2)
+
+	.  reduce 2
+
+
+state 4
+	expr : PARES_OUV . expr PARES_FERM  (4)
+
+	INTCONST  shift 3
+	PARES_OUV  shift 4
+	CRO_OUV  shift 5
+	ACO_OUV  shift 6
+	.  error
+
+	expr  goto 9
+
+
+state 5
+	expr : CRO_OUV . expr CRO_FERM  (5)
+
+	INTCONST  shift 3
+	PARES_OUV  shift 4
+	CRO_OUV  shift 5
+	ACO_OUV  shift 6
+	.  error
+
+	expr  goto 10
+
+
+state 6
+	expr : ACO_OUV . expr ACO_FERM  (6)
+
+	INTCONST  shift 3
+	PARES_OUV  shift 4
+	CRO_OUV  shift 5
+	ACO_OUV  shift 6
+	.  error
+
+	expr  goto 11
+
+
+state 7
+	start : expr . EOL  (1)
+	expr : expr . PLUS expr  (3)
+
+	PLUS  shift 12
+	EOL  shift 13
+	.  error
+
+
+state 8
+	%entry% : '\001' start .  (7)
+
+	.  reduce 7
+
+
+state 9
+	expr : expr . PLUS expr  (3)
+	expr : PARES_OUV expr . PARES_FERM  (4)
+
+	PLUS  shift 12
+	PARES_FERM  shift 14
+	.  error
+
+
+state 10
+	expr : expr . PLUS expr  (3)
+	expr : CRO_OUV expr . CRO_FERM  (5)
+
+	PLUS  shift 12
+	CRO_FERM  shift 15
+	.  error
+
+
+state 11
+	expr : expr . PLUS expr  (3)
+	expr : ACO_OUV expr . ACO_FERM  (6)
+
+	PLUS  shift 12
+	ACO_FERM  shift 16
+	.  error
+
+
+state 12
+	expr : expr PLUS . expr  (3)
+
+	INTCONST  shift 3
+	PARES_OUV  shift 4
+	CRO_OUV  shift 5
+	ACO_OUV  shift 6
+	.  error
+
+	expr  goto 17
+
+
+state 13
+	start : expr EOL .  (1)
+
+	.  reduce 1
+
+
+state 14
+	expr : PARES_OUV expr PARES_FERM .  (4)
+
+	.  reduce 4
+
+
+state 15
+	expr : CRO_OUV expr CRO_FERM .  (5)
+
+	.  reduce 5
+
+
+state 16
+	expr : ACO_OUV expr ACO_FERM .  (6)
+
+	.  reduce 6
+
+
+state 17
+	expr : expr . PLUS expr  (3)
+	expr : expr PLUS expr .  (3)
+
+	.  reduce 3
+
+
+13 terminals, 4 nonterminals
+8 grammar rules, 18 states
