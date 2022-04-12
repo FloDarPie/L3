@@ -1,1 +1,2 @@
-return 42 ;
+return 423 ;
+return true;

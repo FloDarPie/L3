@@ -1,0 +1,60 @@
+   0  $accept : %entry% $end
+
+   1  start : expr EOL
+
+   2  expr : INTCONST
+
+   3  %entry% : '\001' start
+
+state 0
+	$accept : . %entry% $end  (0)
+
+	'\001'  shift 1
+	.  error
+
+	%entry%  goto 2
+
+
+state 1
+	%entry% : '\001' . start  (3)
+
+	INTCONST  shift 3
+	.  error
+
+	expr  goto 4
+	start  goto 5
+
+
+state 2
+	$accept : %entry% . $end  (0)
+
+	$end  accept
+
+
+state 3
+	expr : INTCONST .  (2)
+
+	.  reduce 2
+
+
+state 4
+	start : expr . EOL  (1)
+
+	EOL  shift 6
+	.  error
+
+
+state 5
+	%entry% : '\001' start .  (3)
+
+	.  reduce 3
+
+
+state 6
+	start : expr EOL .  (1)
+
+	.  reduce 1
+
+
+7 terminals, 4 nonterminals
+4 grammar rules, 7 states

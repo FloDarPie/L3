@@ -1,3 +1,6 @@
+exec : executable.ml parser.cmo lexer.cmo
+	ocaml < executable.ml
+
 all: lang.cmo parser.cmo lexer.cmo interf.cmo
 
 # Compilation of .ml files

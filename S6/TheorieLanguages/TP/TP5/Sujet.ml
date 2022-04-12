@@ -126,7 +126,7 @@ let rec inverseRelation sommet lettre = function
 | 0 -> []
 | a -> try
 
-(*extraire la liste de destinantion*)
+(*extraire la liste de destination*)
 let k = (an1.eN a).tN lettre in 
 
 if appartient (sommet,k) then a :: (inverseRelation sommet lettre (a-1)) else inverseRelation sommet lettre (a-1) with Match_failure _ -> inverseRelation sommet lettre (a-1)

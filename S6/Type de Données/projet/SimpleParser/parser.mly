@@ -4,8 +4,10 @@ open Lang
 
 %token <bool> BCONSTANT
 %token <int> INTCONSTANT
+
 %token SEMICOLON
 %token RETURN
+
 %token EOF
 
 
