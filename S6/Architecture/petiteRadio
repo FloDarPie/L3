@@ -1,0 +1,48 @@
+// code de l'émetteur
+#include <VirtualWire.h>
+#include <SoftwareSerial.h>
+
+SoftwareSerial mySerial(16, 17); // RX, TX
+
+
+int RF_TX_PIN = 13;
+const int led_bleue = 4;
+
+
+char msg[] = "\x01\x01\x11pouet pouet";
+long t = 0;
+void setup()
+{
+  Serial.begin(9600);
+  Serial.println("setup");
+
+  mySerial.begin(9600);
+
+  pinMode(led_bleue, OUTPUT);
+  
+  vw_set_tx_pin(RF_TX_PIN); // initialisation de la broche d'envoi
+  vw_setup(2000); // choix de la vitesse de transmission
+}
+
+
+void emission_radio (void){
+    digitalWrite(led_bleue,HIGH);  
+    /*
+    Serial.print("envoi d'un message : ");
+    Serial.println(3 + msg);*/
+    int res = vw_send((uint8_t *)msg, 4 + strlen(msg + 3));
+    delay(1000);
+    digitalWrite(led_bleue,LOW);
+    //Serial.println("Fin envoi");
+    delay(3000);
+}
+
+void loop(){
+    if (mySerial.available() > 0) { // vrai si o a reçu un caractère sur la liaison série
+        char lu = mySerial.read();// met dans lu le caractère lu
+        Serial.println(lu);
+    }
+
+    emission_radio();
+  
+}

@@ -1,0 +1,58 @@
+#include <SoftwareSerial.h> 
+#include <TimerThree.h> 
+int led_bleue = 4;
+int led_rouge = 2;
+int bouton_bleue = 5; 
+int bouton_rouge = 3; 
+SoftwareSerial SerialLink(10, 11); 
+// RX, TX 
+void setup(void){ 
+    Serial.begin(9600);
+    SerialLink.begin(9600); 
+    pinMode(led_bleue, OUTPUT); 
+    pinMode(led_rouge, OUTPUT); 
+    pinMode(bouton_bleue, INPUT_PULLUP); 
+    pinMode(bouton_rouge, INPUT_PULLUP); 
+    Timer3.initialize((int)(0.1 * 1000000)); 
+    Timer3.attachInterrupt(loopSend); 
+
+}
+
+void loop(){
+    loopReceive(); 
+    delay(1);
+    
+} 
+
+void loopSend(void){ 
+    if(digitalRead(bouton_rouge) == LOW){ 
+        Serial.println("ROUGE"); 
+        SerialLink.println(1); 
+        
+    } if(digitalRead(bouton_bleue) == LOW){ 
+        Serial.println("BLEU"); 
+        SerialLink.println(2); 
+        
+    } 
+    
+} 
+
+void loopReceive(void){ 
+    if (SerialLink.available() > 0) { 
+        char message_lu = SerialLink.read(); 
+        Serial.print(message_lu); 
+        if (message_lu == '1'){ 
+            digitalWrite(led_rouge,HIGH); 
+            delay(100); 
+            digitalWrite(led_rouge,LOW);
+            
+        } else if (message_lu == '2'){ 
+            digitalWrite(led_bleue,HIGH); 
+            delay(100); 
+            digitalWrite(led_bleue,LOW); 
+            
+        }
+        
+    }
+    
+}

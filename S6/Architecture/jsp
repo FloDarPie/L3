@@ -1,0 +1,39 @@
+#include <SoftwareSerial.h>
+
+//initialisation du branchement
+SoftwareSerial mySerial(10, 11); // RX, TX
+
+led_bleue = 2;
+led_orange = 4;
+petit_delay = 101;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("setup");
+  
+  mySerial.begin(9600);
+  pinMode(led_bleue, OUTPUT);
+  pinMode(led_orange, OUTPUT);
+  
+}
+
+
+void affichage(char lu){
+  if (lu == '1'){//affiche led1
+    digitalWrite(led_bleue,HIGH);
+    delay(petit_delay);
+    digitalWrite(led_bleue,LOW);
+  } else if (lu == '2'){//affiche led2
+    digitalWrite(led_orange,HIGH);
+        delay(petit_delay);
+    digitalWrite(led_orange,LOW);
+  }
+}
+
+void loop() {
+  if (mySerial.available() > 0) { // vrai si o a reçu un caractère sur la liaison série
+    char lu = mySerial.read();// met dans lu le caractère lu
+    Serial.print(lu);
+    affichage(lu);
+  }
+}

@@ -1,0 +1,110 @@
+// code de l'émetteur
+#include <VirtualWire.h>
+#include <TimerOne.h>
+#include <TimerFive.h>
+
+//reception 
+int RF_RX_PIN = 6; 
+//emission 
+int RF_TX_PIN = 4; 
+int LED = 18; 
+//message initial 
+//prot \from \to msg 
+char msg[] = "\x02\x02\x01 Flo 2."; 
+long t = 0; 
+
+/////////////////////////////////////// 
+void bouton() { 
+    if (millis() - t > 200) emission(msg); 
+    t = millis(); 
+} 
+
+////////////////////////////////////////
+void emission(char msg[]) { 
+    Serial.print("envoi d'un message : "); 
+    Serial.println(3 + msg); 
+    int res = vw_send((uint8_t *)msg, 4 + strlen(msg + 3)); 
+    Serial.println(); 
+    delay(1500);
+}
+
+//////////////////////////////////////// 
+void protocole1(char msg[], uint8_t *buf, uint8_t buflen) { 
+    Serial.println("Emmeteur :"); 
+    Serial.println(buf[1], 10); 
+    Serial.println("Destinataire :"); 
+    Serial.println(buf[2], 10); 
+    for (int i = 3; i < buflen; i++) 
+        Serial.write((char)buf[i]); 
+    Serial.print(" "); 
+    Serial.println("");
+}
+
+void protocole2(char msg[], uint8_t *buf, uint8_t buflen) { 
+    Serial.println("Emmeteur :"); 
+    Serial.println(buf[1], 10); 
+    Serial.println("Destinataire :"); 
+    Serial.println(buf[2], 10); 
+    Serial.println("Trame :"); 
+    Serial.println(buf[3], 10); 
+    Serial.println("Type :"); 
+    Serial.println(buf[4], 10); 
+    for (int i = 5; i < buflen; i++) 
+        Serial.write((char)buf[i]); 
+    Serial.print(" "); 
+    Serial.println("");
+}
+
+void protocole3(char msg[], uint8_t *buf, uint8_t buflen) { 
+    Serial.println("Emmeteur :"); 
+    Serial.println((char)buf[1]); 
+    Serial.println("Destinataire :"); 
+    Serial.println((char)buf[2]); 
+    for (int i = 3; i < buflen; i++) 
+        Serial.write((char)buf[i]); 
+    Serial.print(" "); 
+    Serial.println("");
+} 
+
+//////////////////////////////////////// 
+void setup() { 
+    Serial.begin(9600); 
+    Serial.println("setup"); 
+    vw_set_rx_pin(RF_RX_PIN);     // initialisation de la broche de reception 
+    vw_set_tx_pin(RF_TX_PIN);     // initialisation de la broche d'envoi 
+    vw_setup(2000);               // choix de la vitesse de transmission 
+    vw_rx_start();                //démarrage du récepteur 
+    
+    //setup LED 
+    pinMode(LED, INPUT_PULLUP); 
+    attachInterrupt(digitalPinToInterrupt(LED), bouton, FALLING); 
+    
+    //loop de reception 
+    Timer5.initialize(150000); 
+    Timer5.attachInterrupt(reception); 
+} 
+
+//Loop d'ecoute 
+void reception() { 
+    uint8_t buf[VW_MAX_MESSAGE_LEN]; 
+    uint8_t buflen = VW_MAX_MESSAGE_LEN; 
+    if (vw_get_message(buf, &buflen)) // non-blocking I/O 
+        { int i; // si on a reçu un message 
+        Serial.println("Reception-------------------"); 
+        Serial.print("Protocole :"); 
+        Serial.println(buf[0], 10); 
+        if (buf[0] = 1) { protocole1(msg, buf, buflen); } 
+        else if (buf[0] = 2) { protocole2(msg, buf, buflen); } 
+        else if (buf[0] = 3) { protocole3(msg, buf, buflen); } 
+        else { Serial.println("-Protocole inconnu-"); 
+        for (i = 0; i < buflen; i++) {
+            Serial.write((char)buf[i]);
+            Serial.print(" ");
+        } 
+        Serial.println("");
+        }; 
+    }
+}
+
+//Loop finale 
+void loop() { }
